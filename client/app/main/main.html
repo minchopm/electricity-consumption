@@ -1,0 +1,57 @@
+<md-content>
+  <md-tabs md-dynamic-height md-border-bottom md-center-tabs="true" md-selected="selectedIndex">
+    <md-tab label="one">
+    </md-tab>
+    <md-tab label="two">
+    </md-tab>
+  </md-tabs>
+
+  <form name="electricityForm" ng-submit="calculation()">
+    <md-content class="md-padding" flex layout="row" layout-align="center none">
+      <section layout="column" layout-sm="column" flex="66" layout-align="center center" layout-wrap>
+        <h1 class="md-display-2">{{years[selectedIndex]}} years life panel</h1>
+        <h3 class="md-display-5">cost ${{panelCostOfPower[selectedIndex] * 200}} for one panel</h3>
+        <div layout-gt-sm="row" layout-sm="column" layout-align="space-around center" class="fullWidth">
+          <div layout="row" layout-align="center center">
+            <md-icon>$</md-icon>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>Cost Of Watt (USD)</label>
+              <input ng-model="costOfPower" required type="number" step="0.01" name="costOfPower" min="0.1"
+                     ng-pattern="/^(0|[1-9]\d*)(\.\d+)?$/">
+              <div ng-messages="electricityForm.costOfPower.$error">
+                <div ng-message="required">This field is required.</div>
+                <div ng-message="ng-pattern">You have to use the follow format (x.xx)</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-align="center center">
+            <md-input-container class="md-block" flex-gt-sm layout="column">
+              <label>Electricity Consumption</label>
+              <input ng-model="electricityConsumption" required type="number" step="0.01"
+                     name="electricityConsumption" min="0.1" ng-pattern="/^(0|[1-9]\d*)(\.\d+)?$/">
+              <div ng-messages="electricityForm.electricityConsumption.$error">
+                <div ng-message="required">This field is required.</div>
+                <div ng-message="ng-pattern">You have to use the follow format (x.xx)</div>
+              </div>
+            </md-input-container>
+            <md-icon layout="column" class="width100"> kWh/month</md-icon>
+          </div>
+        </div>
+        <div class="fullWidth">
+          <md-slider-container flex="100">
+            <span>Solar Energy %</span>
+            <md-slider flex min="0" max="100" ng-model="solarEnergy" aria-label="solar energy" id="solarEnergy">
+            </md-slider>
+            <md-input-container>
+              <input flex type="number" step="1"  min="1" required ng-model="solarEnergy" aria-label="solar energy"
+                     aria-controls="solar-energy-slider">
+            </md-input-container>
+          </md-slider-container>
+        </div>
+        <div layout="column" class="md-block">
+          <md-button class="md-raised" type="submit">Customize</md-button>
+        </div>
+      </section>
+    </md-content>
+  </form>
+</md-content>
